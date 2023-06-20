@@ -24,6 +24,7 @@ resource "random_string" "bastionSG_suffix" {
 resource "aws_security_group" "bastionSG" {
   name        = "bastionSG-${random_string.bastionSG_suffix.result}"
   description = "Security group for bastion instance"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 443

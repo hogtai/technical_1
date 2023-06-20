@@ -31,3 +31,7 @@ variable "security_group_id" {
   description = "The ID of the security group to attach to the EC2 instance"
   type        = string
 }
+
+variable "vpc_id" {
+  description = "The ID of the VPC where resources will be created"
+}

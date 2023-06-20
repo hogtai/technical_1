@@ -30,7 +30,6 @@ module "vpc_security_group" {
   security_group_description = var.security_group_description
   inbound_port1              = var.inbound_port1
   inbound_port2              = var.inbound_port2
-
 }
 
 module "bastion_security_group" {
@@ -106,6 +105,7 @@ module "bastion" {
   source                = "./modules/ec2"
   region                = var.region
   bastion_instance_name = var.bastion_instance_name
+  vpc_id                = module.vpc.vpc_id
   windows_ami           = var.windows_ami
   bastion_instance_type = var.bastion_instance_type
   key_pair_name         = var.key_pair_name
@@ -118,6 +118,7 @@ module "wpserver1" {
   source                = "./modules/ec2"
   region                = var.region
   bastion_instance_name = var.wpserver1_instance_name
+  vpc_id                = module.vpc.vpc_id
   windows_ami           = var.redhat_ami
   bastion_instance_type = var.wpserver_instance_type
   key_pair_name         = var.key_pair_name
@@ -130,6 +131,7 @@ module "wpserver2" {
   source                = "./modules/ec2"
   region                = var.region
   bastion_instance_name = var.wpserver2_instance_name
+  vpc_id                = module.vpc.vpc_id
   windows_ami           = var.redhat_ami
   bastion_instance_type = var.wpserver_instance_type
   key_pair_name         = var.key_pair_name
@@ -157,7 +159,7 @@ module "alb" {
   region            = var.region
   alb_name          = var.alb_name
   subnet_ids        = module.wp_subnets.wp_subnet_ids
-  security_group_id = module.vpc_security_group.security_group_id
+  security_group_id = module.alb_security_group.security_group_id
   listen_port       = var.alb_listen_port
   target_group_name = var.target_group_name
   target_port       = var.target_port
