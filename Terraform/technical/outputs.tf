@@ -23,11 +23,6 @@ output "db_subnet_ids" {
   value       = module.db_subnets.db_subnet_ids
 }
 
-output "bastion_instance_id" {
-  description = "The ID of the Bastion instance"
-  value       = module.bastion.instance_id
-}
-
 output "wpserver1_instance_id" {
   description = "The ID of the first web application server instance"
   value       = module.wpserver1.instance_id
@@ -57,3 +52,14 @@ output "postgres_security_group_id" {
   description = "The ID of the PostgreSQL security group"
   value       = module.postgres_security_group.security_group_id
 }
+
+output "alb_dns_name" {
+  description = "The DNS name of the ALB"
+  value       = module.alb.alb_dns_name
+}
+
+output "target_group_arn" {
+  description = "The ARN of the Target Group"
+  value       = module.alb.target_group_arn
+}
+

@@ -244,3 +244,26 @@ variable "postgres_inbound_port1" {
   type        = number
   default     = 5432
 }
+variable "alb_name" {
+  description = "The name of the Application Load Balancer"
+  type        = string
+  default     = "myalb"
+}
+
+variable "alb_listen_port" {
+  description = "The port on which the load balancer is listening"
+  type        = number
+  default     = 443
+}
+
+variable "target_group_name" {
+  description = "The name of the target group"
+  type        = string
+  default     = "wpserver1-2-group"
+}
+
+variable "target_port" {
+  description = "The port on which the targets receive traffic"
+  type        = number
+  default     = 443
+}

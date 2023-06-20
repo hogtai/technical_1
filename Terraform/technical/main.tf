@@ -66,7 +66,7 @@ module "bastion" {
   bastion_instance_type = var.bastion_instance_type
   key_pair_name         = var.key_pair_name
   public_subnet         = module.public_subnets.public_subnet_ids[0]
-  security_group_id     = [module.vpc_security_group]
+  security_group_id     = module.vpc_security_group.security_group_id
   bastion_volume_size   = var.bastion_volume_size
 }
 
@@ -78,7 +78,7 @@ module "wpserver1" {
   bastion_instance_type = var.wpserver_instance_type
   key_pair_name         = var.key_pair_name
   public_subnet         = module.wp_subnets.wp_subnet_ids[0]
-  security_group_id     = [module.wpserver_security_group]
+  security_group_id     = module.wpserver_security_group.security_group_id
   bastion_volume_size   = var.wpserver_volume_size
 }
 
@@ -90,7 +90,7 @@ module "wpserver2" {
   bastion_instance_type = var.wpserver_instance_type
   key_pair_name         = var.key_pair_name
   public_subnet         = module.wp_subnets.wp_subnet_ids[1]
-  security_group_id     = [module.wpserver_security_group]
+  security_group_id     = module.wpserver_security_group.security_group_id
   bastion_volume_size   = var.wpserver_volume_size
 }
 
@@ -109,9 +109,14 @@ module "rds" {
 }
 
 module "alb" {
-  source         = "./modules/alb"
-  vpc_id         = module.vpc.vpc_id
-  subnet_ids     = module.public_subnets.public_subnet_ids
-  security_group = var.alb_security_group
-  listener_port  = var.alb_listener_port
+  source            = "./modules/alb"
+  region            = var.region
+  alb_name          = var.alb_name
+  subnet_ids        = module.wp_subnets.wp_subnet_ids
+  security_group_id = module.vpc_security_group.security_group_id
+  listen_port       = var.alb_listen_port
+  target_group_name = var.target_group_name
+  target_port       = var.target_port
+  vpc_id            = module.vpc.vpc_id
+  target_ids        = [module.wpserver1.instance_id, module.wpserver2.instance_id]
 }
