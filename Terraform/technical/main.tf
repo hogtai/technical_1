@@ -34,6 +34,13 @@ module "postgres_security_group" {
   inbound_port1              = var.postgres_inbound_port1
 }
 
+module "alb_security_group" {
+  source                     = "./modules/securitygroups/albSG"
+  security_group_name        = var.alb_security_group_name
+  security_group_description = var.alb_security_group_description
+  inbound_port               = var.alb_inbound_port
+}
+
 module "public_subnets" {
   source             = "./modules/subnets"
   vpc_id             = module.vpc.vpc_id

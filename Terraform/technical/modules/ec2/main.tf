@@ -1,9 +1,28 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.4.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0"
+    }
+  }
+}
+
 provider "aws" {
   region = var.region
 }
 
+resource "random_string" "bastionSG_suffix" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
 resource "aws_security_group" "bastionSG" {
-  name        = "bastionSG"
+  name        = "bastionSG-${random_string.bastionSG_suffix.result}"
   description = "Security group for bastion instance"
 
   ingress {
@@ -50,5 +69,3 @@ resource "aws_instance" "bastion" {
     volume_size = var.bastion_volume_size
   }
 }
-
-

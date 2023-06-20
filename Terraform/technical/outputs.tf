@@ -63,3 +63,7 @@ output "target_group_arn" {
   value       = module.alb.target_group_arn
 }
 
+output "alb_security_group_id" {
+  description = "The ID of the ALB security group"
+  value       = module.alb_security_group.security_group_id
+}

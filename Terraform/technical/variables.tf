@@ -267,3 +267,18 @@ variable "target_port" {
   type        = number
   default     = 443
 }
+
+variable "alb_security_group_name" {
+  description = "The name of the ALB security group"
+  type        = string
+}
+
+variable "alb_security_group_description" {
+  description = "The description of the ALB security group"
+  type        = string
+}
+
+variable "alb_inbound_port" {
+  description = "The first inbound port for the ALB security group"
+  type        = number
+}
