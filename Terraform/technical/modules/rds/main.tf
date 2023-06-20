@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.4.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "~> 3.5.1"
+    }
+  }
+}
+
 resource "aws_db_subnet_group" "default" {
   name       = "${var.db_name}_subnet_group"
   subnet_ids = var.subnet_ids

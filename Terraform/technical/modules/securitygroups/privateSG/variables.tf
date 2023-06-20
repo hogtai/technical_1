@@ -30,3 +30,8 @@ variable "outbound_cidr_blocks" {
   default     = ["0.0.0.0/0"]
 }
 
+variable "vpc_id" {
+  description = "The ID of the VPC in which to create the security group"
+  type        = string
+}
+

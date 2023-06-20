@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.4.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "~> 3.5.1"
+    }
+  }
+}
+
 resource "aws_security_group" "vpc_security_group" {
   name        = var.security_group_name
   description = var.security_group_description

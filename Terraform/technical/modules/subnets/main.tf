@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.4.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "~> 3.5.1"
+    }
+  }
+}
+
 resource "aws_subnet" "subnet" {
   count                   = length(var.subnet_cidrs)
   vpc_id                  = var.vpc_id

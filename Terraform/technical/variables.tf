@@ -271,14 +271,34 @@ variable "target_port" {
 variable "alb_security_group_name" {
   description = "The name of the ALB security group"
   type        = string
+  default     = "alb_sg"
 }
 
 variable "alb_security_group_description" {
   description = "The description of the ALB security group"
   type        = string
+  default     = "Allows ingress traffic on port 443"
 }
 
 variable "alb_inbound_port" {
   description = "The first inbound port for the ALB security group"
   type        = number
+  default     = 443
+}
+
+variable "bastion_security_group_name" {
+  description = "The name of the bastion security group"
+  type        = string
+  default     = "bastion-security-group" // replace with your desired name
+}
+
+variable "bastion_security_group_description" {
+  description = "The description of the bastion security group"
+  type        = string
+  default     = "Security group for bastion host"
+}
+variable "bastion_inbound_ports" {
+  description = "The inbound ports for the bastion security group"
+  type        = list(number)
+  default     = [22, 80, 443]
 }
