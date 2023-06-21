@@ -1,0 +1,27 @@
+## Array of ASR rule GUIDs
+$ruleGUIDs = @(
+    "D4F940AB-401B-4EFC-AADC-AD5F3C50688A", # Block executable content from email client and webmail
+    "3B576869-A4EC-4529-8536-B80A7769E899", # Use advanced protection against ransomware
+    "75668C1F-73B5-4CF0-BB93-3ECF5CB7CC84", # Block all Office applications from creating child processes
+    "D3E037E1-3EB8-44C8-A917-57927947596D", # Block Office applications from creating executable content
+    "5BEB7EFE-FD9A-4556-801D-275E5FFC04CC", # Block Office applications from injecting code into other processes
+    "92E97FA1-2EDF-4476-BDD6-9DD0B4DDDC7B", # Block JavaScript or VBScript from launching downloaded executable content
+    "BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550", # Block execution of potentially obfuscated scripts
+    "DCB3B048-4D99-4CFB-B8DD-2F872362D5DF", # Block Win32 API calls from Office macro
+    "D1E49AAC-8F56-4280-B9BA-993A6D77406C", # Block command-line invocation of Office
+    "B2B3F03D-6A65-4F7B-A9C7-1C7EF74A9BA4", # Block Office communication application from creating child processes
+    "26190899-1602-49e8-8b27-ebd0a1ce8699", # Block Adobe Reader from creating child processes
+    "7674BA52-37EB-4A4F-A9A1-F0F9A1619A2C", # Block persistence through WMI event subscription
+    "e6db77e5-3df2-4cf1-b95a-6369794b2a14", # Block process creations originating from PSExec and WMI commands
+    "d1fb9a7b-7f6a-43ba-97ca-64904b637223", # Block untrusted and unsigned processes that run from USB
+    "b2e37fe6-de7b-4b5f-affe-83051e4cef2c", # Block Office applications from injecting into process
+    "0f97e6c3-9f0e-4c0e-ba05-8a05b94883a7", # Block Execution of software potentially obfuscated by encryption
+    "e2391b2d-c589-4bc7-969e-d74b6743c531"  # Block Adobe Reader from creating Child processes
+)
+
+# Import the Defender module
+Import-Module Defender
+
+# Loop through each GUID and enable the rule
+foreach ($guid in $ruleGUIDs) {
+    Set-MpPreference -AttackSurfaceReduction
